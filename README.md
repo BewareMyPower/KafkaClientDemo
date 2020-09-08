@@ -8,8 +8,7 @@ Build the jar with dependencies and run:
 
 ```bash
 $ mvn clean package
-$ cd targets
-$ java -jar KafkaClientDemo-1.0-SNAPSHOT.jar
+$ java -jar target/KafkaClientDemo-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 The program will start a background consumer that consumes and print messages and a console producer that accepts input from standard input and send each line as a message.
@@ -26,11 +25,10 @@ Send line: world
 [1] ConsumerRecord(topic = test_xyz, partition = 1, offset = 2, CreateTime = 1599563972996, serialized key size = -1, serialized value size = 5, headers = RecordHeaders(headers = [], isReadOnly = false), key = null, value = world)
 ```
 
-If you want to change the properties files and rerun, use Maven to run the class:
+If you want to change the properties files and rerun, use Maven to execute the class instead of run the `*.jar`:
 
 ```bash
-$ mvn compile
-# Modify *.properties in target/classes/
+# Make sure that you have build the classes into target/classes/ before, use `mvn compile`
 $ mvn exec:java -Dexec.mainClass=io.github.bewaremypower.Starter
 ```
 
