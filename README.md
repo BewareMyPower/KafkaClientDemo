@@ -12,6 +12,20 @@ $ cd targets
 $ java -jar KafkaClientDemo-1.0-SNAPSHOT.jar
 ```
 
+The program will start a background consumer that consumes and print messages and a console producer that accepts input from standard input and send each line as a message.
+
+e.g. send `hello` and `world`:
+
+```
+hello
+Send line: hello
+2020-09-08 19:19:31:554 [kafka-producer-network-thread | producer-1] INFO org.apache.kafka.clients.Metadata - Cluster ID: ZtF869vnQHiChoclRBaBOw
+[0] ConsumerRecord(topic = test_xyz, partition = 2, offset = 2, CreateTime = 1599563971562, serialized key size = -1, serialized value size = 5, headers = RecordHeaders(headers = [], isReadOnly = false), key = null, value = hello)
+world
+Send line: world
+[1] ConsumerRecord(topic = test_xyz, partition = 1, offset = 2, CreateTime = 1599563972996, serialized key size = -1, serialized value size = 5, headers = RecordHeaders(headers = [], isReadOnly = false), key = null, value = world)
+```
+
 If you want to change the properties files and rerun, use Maven to run the class:
 
 ```bash
