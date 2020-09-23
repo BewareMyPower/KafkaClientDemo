@@ -1,8 +1,6 @@
 package io.github.bewaremypower;
 
 import io.github.bewaremypower.wrapper.ConfiguredProducer;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.io.BufferedReader;
 import java.io.IOException;
