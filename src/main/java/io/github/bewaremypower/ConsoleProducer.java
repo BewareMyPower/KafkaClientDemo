@@ -1,5 +1,6 @@
 package io.github.bewaremypower;
 
+import io.github.bewaremypower.wrapper.ConfiguredProducer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
@@ -7,26 +8,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleProducer implements AutoCloseable {
-    private KafkaProducer<String, String> producer;
-    private String topic;
-
-    ConsoleProducer() {
-        try {
-            Config.loadKafkaConfig();
-            producer = new KafkaProducer<>(Config.getProducerProperties());
-            topic = Config.getTopic();
-        } catch (IOException e) {
-            System.out.println("Failed to create producer: " + e.getMessage());
-        }
-    }
-
-    @Override
-    public void close() throws Exception {
-        producer.close();
-    }
-
-    void run() {
+public class ConsoleProducer extends ConfiguredProducer {
+    public void run() {
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
         try {
             while (true) {
@@ -36,12 +19,12 @@ public class ConsoleProducer implements AutoCloseable {
                 }
                 System.out.println("Send line: " + line);
                 // TODO: parse key from line
-                producer.send(new ProducerRecord<>(topic, line));
+                send(line);
             }
         } catch (IOException e) {
             System.out.println("Failed to read: " + e.getMessage());
         }
-        producer.flush();
+        flush();
         System.out.println("Producer flushed");
     }
 }
